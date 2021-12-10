@@ -3,6 +3,7 @@ package client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Random;
@@ -24,6 +25,7 @@ public class Client {
             String line = null;
             int cont = 0;
             Random gerador = new Random();
+            int valorTotal = 0;
             
             while (cont < 1000000) {  
                 // reading from user
@@ -35,12 +37,15 @@ public class Client {
                 out.flush();
   
                 // displaying server reply
-                in.readLine();
-                cont += 1;
+                //in.readLine();
+                cont += 1;   
+                
+                valorTotal = Integer.parseInt(in.readLine());
             }
-            
             // closing the scanner object
+            
             sc.close();
+            System.out.println("Valor final: "+ valorTotal);
         }
         catch (IOException e) {
             e.printStackTrace();
