@@ -12,7 +12,8 @@ import java.util.logging.Logger;
 import java.util.Random;
 
 public class Server {
-
+    private static int num = 0;
+    
     public static void main(String[] args) {
         ServerSocket server = null;
 
@@ -26,20 +27,18 @@ public class Server {
             while (true) {
                
                 Socket client = server.accept();
-
+                num++;
                 
                 System.out.println("New client connected" + client.getInetAddress().getHostAddress());
 
                 Random randomNumberClient = new Random();
 
-                randomNumberClient.nextInt(3);
-
-                int numberClient = randomNumberClient + 1;
+                int numberClient = randomNumberClient.nextInt(3) + 1;
                 
                 ClientHandler clientSock = new ClientHandler(client,numberClient);
 
                 
-                new Thread(clientSock).start().;
+                new Thread(clientSock).start();
                 
             }
         } catch (IOException e) {
@@ -83,7 +82,7 @@ public class Server {
                 while ( line != null) {
                     
                     accumulatorSum += Integer.parseInt(line);
-                    System.out.printf(" Recebido do cliente %d valor = %d\n", numberClient,Integer.parseInt(line));
+                    System.out.printf(" Recebido do cliente %d valor = %d\n", num ,Integer.parseInt(line));
                     out.println(Integer.toString(accumulatorSum));
                     line = in.readLine();
                 }
