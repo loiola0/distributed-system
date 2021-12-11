@@ -76,6 +76,7 @@ public class Server {
                     accumulatorSum += Integer.parseInt(line);
                     System.out.printf(" Recebido do cliente: %d\n", Integer.parseInt(line));
                     out.println(Integer.toString(accumulatorSum));
+                    line = in.readLine();
                 }
                 
             } catch (IOException e) {
