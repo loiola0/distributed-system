@@ -55,7 +55,7 @@ public class Server {
     private static class ClientHandler implements Runnable {
 
         private final Socket clientSocket;
-        private static int cont = 0;
+        private static int accumulatorSum = 0;
 
         // Constructor
         public ClientHandler(Socket socket) {
@@ -73,13 +73,13 @@ public class Server {
                 // get the inputstream of client
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-                String line;
-                while ((line = in.readLine()) != null) {
+                String line = in.readLine();
+                while ( line != null) {
                     // writing the received message from
                     // client
-                    cont += Integer.parseInt(line);
+                    accumulatorSum += Integer.parseInt(line);
                     System.out.printf(" Recebido do cliente: %d\n", Integer.parseInt(line));
-                    out.println(Integer.toString(cont));
+                    out.println(Integer.toString(accumulatorSum));
                 }
                 
             } catch (IOException e) {
