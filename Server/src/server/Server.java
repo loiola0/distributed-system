@@ -16,26 +16,23 @@ public class Server {
         ServerSocket server = null;
 
         try {
-            // server is listening on port 1234
-            server = new ServerSocket(1234);
+            int port = 1234;
+            server = new ServerSocket(port);
             server.setReuseAddress(true);
-
-            // running infinite loop for getting
-            // client request
+            
+            System.out.printf("Servidor rodando na porta: "+port);
+            
             while (true) {
-                // socket object to receive incoming client
-                // requests
+               
                 Socket client = server.accept();
 
-                // Displaying that new client is connected
-                // to server
+                
                 System.out.println("New client connected" + client.getInetAddress().getHostAddress());
 
-                // create a new thread object
+                
                 ClientHandler clientSock = new ClientHandler(client);
 
-                // This thread will handle the client
-                // separately
+                
                 new Thread(clientSock).start();
             }
         } catch (IOException e) {
@@ -51,13 +48,13 @@ public class Server {
         }
     }
 
-    // ClientHandler class
+    
     private static class ClientHandler implements Runnable {
 
         private final Socket clientSocket;
         private static int accumulatorSum = 0;
 
-        // Constructor
+        
         public ClientHandler(Socket socket) {
             this.clientSocket = socket;
         }
@@ -67,16 +64,15 @@ public class Server {
             BufferedReader in = null;
 
             try {
-                // get the outputstream of client
+                
                 out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-                // get the inputstream of client
+                
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
                 String line = in.readLine();
                 while ( line != null) {
-                    // writing the received message from
-                    // client
+                    
                     accumulatorSum += Integer.parseInt(line);
                     System.out.printf(" Recebido do cliente: %d\n", Integer.parseInt(line));
                     out.println(Integer.toString(accumulatorSum));
