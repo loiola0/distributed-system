@@ -61,7 +61,7 @@ public class Server {
         private final Socket clientSocket;
         private static int accumulatorSum = 0;
 
-        private int numberClient = 0;
+        private static int numberClient = 0;
         
         public ClientHandler(Socket socket,int numberClient) {
             this.clientSocket = socket;
