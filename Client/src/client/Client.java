@@ -13,7 +13,8 @@ public class Client {
     public static void main(String[] args) {
         // establish a connection by providing host and port
         // number
-        try (Socket socket = new Socket("localhost", 1234)) {
+        int port = 1234;
+        try (Socket socket = new Socket("localhost", port)) {
             // writing to server
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
   
@@ -26,8 +27,8 @@ public class Client {
             int cont = 0;
             Random gerador = new Random();
             int valorTotal = 0;
-            
-            while (cont < 1000000) {  
+            int numberRandomNumbers = 1000000
+            while (cont < numberRandomNumbers) {  
                 // reading from user
                 int valor = gerador.nextInt(1001);
                 line = Integer.toString(valor);
