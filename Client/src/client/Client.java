@@ -27,10 +27,13 @@ public class Client {
             int cont = 0;
             Random gerador = new Random();
             int valorTotal = 0;
-            int numberRandomNumbers = 1000000
+            int numberRandomNumbers = 1000000;
+            int intervalRandomNumber = 1001;
+            
+            
             while (cont < numberRandomNumbers) {  
                 // reading from user
-                int valor = gerador.nextInt(1001);
+                int valor = gerador.nextInt(intervalRandomNumber);
                 line = Integer.toString(valor);
   
                 // sending the user input to server
